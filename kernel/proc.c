@@ -159,8 +159,6 @@ fork(void)
   return pid;
 }
 
-// hehe
-
 // Exit the current process.  Does not return.
 // An exited process remains in the zombie state
 // until its parent calls wait() to find out it exited.
