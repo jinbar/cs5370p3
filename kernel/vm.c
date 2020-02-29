@@ -364,3 +364,24 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
   }
   return 0;
 }
+
+int setpermbit(pde_t*pgdir , const void* va, uint perm){
+  pde_t* pde = walkpgdir(pgdir, va, 0); 
+
+  if (pde == 0) return -1; 
+
+  (*pde) |= perm; 
+  lcr3(PADDR(pgdir)); 
+  return 0; 
+}
+
+int unsetpermbit(pde_t*pgdir , const void* va, uint perm){
+  pde_t* pde = walkpgdir(pgdir, va, 0); 
+
+  if (pde == 0) return -1; 
+
+  (*pde) &= ~perm; 
+  lcr3(PADDR(pgdir)); 
+  return 0; 
+}
+
