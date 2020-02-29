@@ -17,7 +17,7 @@ main(int argc, char *argv[])
     }
 
     if (fork() == 0) {
-        int rnt_code = mprotect((void *)ptr_aligned, 1);
+        int rnt_code = mprotect((void *)ptr_aligned, 5);
         if (rnt_code == 0) {
             printf(1, "write to a protected page\n");
            
