@@ -444,8 +444,7 @@ procdump(void)
 }
 
 int mprotect(void* addr, int len){
-   
-  
+   return 0;
 }
 
 int munprotect(void *addr, int len) {
