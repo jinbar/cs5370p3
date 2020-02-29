@@ -26,7 +26,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int mprotect(void*, int); 
-int munproctect(void*, int);
+int munprotect(void*, int);
 
 // user library functions (ulib.c)
 int stat(char*, struct stat*);

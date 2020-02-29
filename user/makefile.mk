@@ -16,10 +16,7 @@ USER_PROGS := \
 	tester\
 	usertests\
 	wc\
-	zombie\
-	mprotect_basic\
-	munprotect_basic\
-	protect_error 
+	zombie 
 
 USER_PROGS := $(addprefix user/, $(USER_PROGS))
 
