@@ -444,12 +444,26 @@ procdump(void)
 }
 
 int mprotect(void* addr, int len){
-
-  return 1; 
-   
   
+  int success; 
+  for (int i = 0; i < len; i ++){
+    success = unsetpermbit(proc->pgdir, addr + i, PTE_W); 
+    if (success == -1){ // failed for some reason
+      return -1; 
+    } 
+  }
+  
+  return 0; 
 }
 
 int munprotect(void *addr, int len) {
-  return 0;
+  int success; 
+  for (int i = 0; i < len; i ++){
+    success = setpermbit(proc->pgdir, addr + i, PTE_W); 
+    if (success == -1){ // failed for some reason
+      return -1; 
+    } 
+  }
+  
+  return 0; 
 }
