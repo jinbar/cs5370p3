@@ -407,8 +407,6 @@ kill(int pid)
   return -1;
 }
 
-
-
 // Print a process listing to console.  For debugging.
 // Runs when user types ^P on console.
 // No lock to avoid wedging a stuck machine further.
@@ -446,7 +444,10 @@ procdump(void)
 }
 
 int mprotect(void* addr, int len){
-   return 0;
+
+  return 1; 
+   
+  
 }
 
 int munprotect(void *addr, int len) {
