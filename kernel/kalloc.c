@@ -20,7 +20,7 @@ struct {
   int size;
 } kmem;
 
-int seed = 0;
+int seed = 1;
 
 extern char end[]; // first address after kernel loaded from ELF file
 
@@ -73,8 +73,8 @@ kalloc(void)
   
   acquire(&kmem.lock);
   r = kmem.freelist;
+  xv6_srand(seed);
   if(r) {
-    xv6_srand(seed);
     int remainder = xv6_rand() % kmem.size;
     if (remainder == 0) {
       kmem.freelist = r->next;
@@ -84,7 +84,6 @@ kalloc(void)
       }
       temp = r->next;
       r->next = r->next->next;
-      seed++;
       kmem.size--;      
     }
   }

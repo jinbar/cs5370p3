@@ -393,15 +393,15 @@ ld  -m    elf_i386 -nostdlib --omagic \
 dd if=/dev/zero of=xv6.img count=10000
 10000+0 records in
 10000+0 records out
-5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0202783 s, 252 MB/s
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0196221 s, 261 MB/s
 dd if=kernel/bootblock of=xv6.img conv=notrunc
 1+0 records in
 1+0 records out
-512 bytes copied, 8.162e-05 s, 6.3 MB/s
+512 bytes copied, 8.3214e-05 s, 6.2 MB/s
 dd if=kernel/kernel of=xv6.img seek=1 conv=notrunc
 258+1 records in
 258+1 records out
-132368 bytes (132 kB, 129 KiB) copied, 0.000539168 s, 246 MB/s
+132400 bytes (132 kB, 129 KiB) copied, 0.000703239 s, 188 MB/s
 gcc -c  -iquote include -Wall -Werror -ggdb  -o tools/mkfs.o tools/mkfs.c
 gcc  tools/mkfs.o -o tools/mkfs
 mkdir -p fs
@@ -495,11 +495,11 @@ compile and test the uniformity and randomness of the random number generator
 
 **********************************************************************
 gcc -Wl,-wrap,rand /u/c/s/cs537-1/tests/p3b/ctests/rand_tester.c kernel/rand.c -I./include -I./user -I.kernel/ -o rand_tester -Wall -Werror
-/tmp/tmpW9qs97/p/./rand_tester 1077 2147483647
-/tmp/tmpW9qs97/p/./rand_tester 5146 2147483647
-/tmp/tmpW9qs97/p/./rand_tester 304 2147483647
-/tmp/tmpW9qs97/p/./rand_tester 1630 2147483647
-/tmp/tmpW9qs97/p/./rand_tester 342 2147483647
+/tmp/tmpX_y13Q/p/./rand_tester 3748 2147483647
+/tmp/tmpX_y13Q/p/./rand_tester 2468 2147483647
+/tmp/tmpX_y13Q/p/./rand_tester 540 2147483647
+/tmp/tmpX_y13Q/p/./rand_tester 1911 2147483647
+/tmp/tmpX_y13Q/p/./rand_tester 2990 2147483647
 Failure: statistical test Test: PRNG failed on Kolmogorov-Smirnov test.
 
 
