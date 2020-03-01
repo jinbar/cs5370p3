@@ -7,6 +7,8 @@
 #include "param.h"
 #include "mmu.h"
 #include "spinlock.h"
+#include "rand.h"
+#include "rand.c"
 
 struct run {
   struct run *next;
@@ -15,7 +17,10 @@ struct run {
 struct {
   struct spinlock lock;
   struct run *freelist;
+  int size;
 } kmem;
+
+int seed = 0;
 
 extern char end[]; // first address after kernel loaded from ELF file
 
@@ -27,8 +32,12 @@ kinit(void)
 
   initlock(&kmem.lock, "kmem");
   p = (char*)PGROUNDUP((uint)end);
-  for(; p + PGSIZE <= (char*)PHYSTOP; p += 2*PGSIZE)
+  kmem.size = 0;
+  for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE) {
     kfree(p);
+    kmem.size++;
+  }
+    
 }
 
 // Free the page of physical memory pointed at by v,
@@ -60,13 +69,28 @@ char*
 kalloc(void)
 {
   struct run *r;
-
+  struct run *temp;
+  
   acquire(&kmem.lock);
   r = kmem.freelist;
-  if(r)
-    kmem.freelist = r->next;
+  if(r) {
+    xv6_srand(seed);
+    int remainder = xv6_rand() % kmem.size;
+    if (remainder == 0) {
+      kmem.freelist = r->next;
+    } else {
+      for (int i = 0; i < remainder - 1; i++) {
+        r = r->next;
+      }
+      temp = r->next;
+      r->next = r->next->next;
+      seed++;
+      kmem.size--;      
+    }
+  }
+    
   release(&kmem.lock);
-  return (char*)r;
+  return (char*)temp;
 }
 
 int dump_allocated(int *frames, int numframes) {
