@@ -15,6 +15,7 @@ struct run {
 struct {
   struct spinlock lock;
   struct run *freelist;
+  struct run *allocated; 
 } kmem;
 
 extern char end[]; // first address after kernel loaded from ELF file
@@ -29,6 +30,8 @@ kinit(void)
   p = (char*)PGROUNDUP((uint)end);
   for(; p + PGSIZE <= (char*)PHYSTOP; p += 2*PGSIZE)
     kfree(p);
+
+  kmem.allocated = NULL; 
 }
 
 // Free the page of physical memory pointed at by v,
@@ -38,7 +41,7 @@ kinit(void)
 void
 kfree(char *v)
 {
-  struct run *r;
+  struct run *r,*p;
 
   if((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) 
     panic("kfree");
@@ -50,6 +53,23 @@ kfree(char *v)
   r = (struct run*)v;
   r->next = kmem.freelist;
   kmem.freelist = r;
+
+  //remove freed node from allocated list. 
+  r = kmem.allocated; 
+  p = NULL; 
+  while(r != NULL){
+    //check if we've found our node. 
+    if ((struct run*)v == r){
+      //check if we're at head of list. 
+      if (p != NULL){
+        p->next = r->next; 
+      }else {
+        kmem.allocated = r->next; 
+      }
+    }
+    p = r; 
+    r = r->next; 
+  }
   release(&kmem.lock);
 }
 
@@ -65,10 +85,36 @@ kalloc(void)
   r = kmem.freelist;
   if(r)
     kmem.freelist = r->next;
+
+  //add to allocated list.
+  r->next = kmem.allocated; 
+  kmem.allocated = r; 
   release(&kmem.lock);
   return (char*)r;
 }
 
 int dump_allocated(int *frames, int numframes) {
-  return 0;
+  struct run *r;  
+  
+  acquire(&kmem.lock);
+  
+  //get the number of allocated frames
+  r = kmem.allocated; 
+  int num_allocated = 0; 
+  while(r != NULL){
+    num_allocated ++; 
+    r = r->next; 
+  }
+
+  if (numframes > num_allocated){
+    return -1; 
+  }
+
+  for(int i = 0; i < numframes; i ++){
+
+  }
+
+  release(&kmem.lock);
+
+  return 0; 
 }

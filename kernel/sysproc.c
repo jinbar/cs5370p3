@@ -111,5 +111,13 @@ int sys_munprotect(void){
 }
 
 int sys_dump_allocated(void) {
+  int frames_pointer;
+  int num_frames;
+
+  if(argint(0, &frames_pointer) < 0 || argint(1, &num_frames) < 0)
+    return -1;
+  
+  return dump_allocated((int*)frames_pointer, num_frames); 
+
   return 0;
 }

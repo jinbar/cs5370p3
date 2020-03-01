@@ -66,6 +66,7 @@ void            ioapicinit(void);
 char*           kalloc(void);
 void            kfree(char*);
 void            kinit(void);
+int             dump_allocated(int*, int); 
 
 // kbd.c
 void            kbdintr(void);
@@ -111,6 +112,7 @@ void            wakeup(void*);
 void            yield(void);
 int             mprotect(void*, int);
 int             munprotect(void*, int); 
+
 
 
 // swtch.S
