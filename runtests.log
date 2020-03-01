@@ -9,10 +9,68 @@ build xv6 using make
 **********************************************************************
 Trying to clean project using make clean
 make clean
+Makefile:149: kernel/bio.d: No such file or directory
+Makefile:149: kernel/console.d: No such file or directory
+Makefile:149: kernel/exec.d: No such file or directory
+Makefile:149: kernel/file.d: No such file or directory
+Makefile:149: kernel/fs.d: No such file or directory
+Makefile:149: kernel/ide.d: No such file or directory
+Makefile:149: kernel/ioapic.d: No such file or directory
+Makefile:149: kernel/kalloc.d: No such file or directory
+Makefile:149: kernel/kbd.d: No such file or directory
+Makefile:149: kernel/lapic.d: No such file or directory
+Makefile:149: kernel/main.d: No such file or directory
+Makefile:149: kernel/mp.d: No such file or directory
+Makefile:149: kernel/picirq.d: No such file or directory
+Makefile:149: kernel/pipe.d: No such file or directory
+Makefile:149: kernel/proc.d: No such file or directory
+Makefile:149: kernel/spinlock.d: No such file or directory
+Makefile:149: kernel/string.d: No such file or directory
+Makefile:149: kernel/swtch.d: No such file or directory
+Makefile:149: kernel/syscall.d: No such file or directory
+Makefile:149: kernel/sysfile.d: No such file or directory
+Makefile:149: kernel/sysproc.d: No such file or directory
+Makefile:149: kernel/timer.d: No such file or directory
+Makefile:149: kernel/trapasm.d: No such file or directory
+Makefile:149: kernel/trap.d: No such file or directory
+Makefile:149: kernel/uart.d: No such file or directory
+Makefile:149: kernel/vectors.d: No such file or directory
+Makefile:149: kernel/vm.d: No such file or directory
+Makefile:149: kernel/bootmain.d: No such file or directory
+Makefile:149: kernel/bootasm.d: No such file or directory
+Makefile:149: kernel/multiboot.d: No such file or directory
+Makefile:149: kernel/data.d: No such file or directory
+Makefile:149: kernel/bootother.d: No such file or directory
+Makefile:149: kernel/initcode.d: No such file or directory
+Makefile:149: user/cat.d: No such file or directory
+Makefile:149: user/echo.d: No such file or directory
+Makefile:149: user/forktest.d: No such file or directory
+Makefile:149: user/grep.d: No such file or directory
+Makefile:149: user/init.d: No such file or directory
+Makefile:149: user/kill.d: No such file or directory
+Makefile:149: user/ln.d: No such file or directory
+Makefile:149: user/ls.d: No such file or directory
+Makefile:149: user/mkdir.d: No such file or directory
+Makefile:149: user/rm.d: No such file or directory
+Makefile:149: user/sh.d: No such file or directory
+Makefile:149: user/stressfs.d: No such file or directory
+Makefile:149: user/tester.d: No such file or directory
+Makefile:149: user/usertests.d: No such file or directory
+Makefile:149: user/wc.d: No such file or directory
+Makefile:149: user/zombie.d: No such file or directory
+Makefile:149: user/ulib.d: No such file or directory
+Makefile:149: user/usys.d: No such file or directory
+Makefile:149: user/printf.d: No such file or directory
+Makefile:149: user/umalloc.d: No such file or directory
+Makefile:149: tools/mkfs.d: No such file or directory
+gcc  -iquote include -Wall -Werror -ggdb  \
+  -M -MG tools/mkfs.c -MF tools/mkfs.d -MT tools/mkfs.d -MT tools/mkfs.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/umalloc.c -MF user/umalloc.d -MT user/umalloc.d -MT user/umalloc.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/printf.c -MF user/printf.d -MT user/printf.d -MT user/printf.o
+gcc  -I include -nostdinc -ggdb  -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/usys.S -MF user/usys.d -MT user/usys.d -MT user/usys.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/ulib.c -MF user/ulib.d -MT user/ulib.d -MT user/ulib.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
@@ -48,11 +106,28 @@ gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/cat.c -MF user/cat.d -MT user/cat.d -MT user/cat.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/initcode.S -MF kernel/initcode.d -MT kernel/initcode.d -MT kernel/initcode.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/bootother.S -MF kernel/bootother.d -MT kernel/bootother.d -MT kernel/bootother.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/data.S -MF kernel/data.d -MT kernel/data.d -MT kernel/data.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/multiboot.S -MF kernel/multiboot.d -MT kernel/multiboot.d -MT kernel/multiboot.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/bootasm.S -MF kernel/bootasm.d -MT kernel/bootasm.d -MT kernel/bootasm.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/bootmain.c -MF kernel/bootmain.d -MT kernel/bootmain.d -MT kernel/bootmain.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/vm.c -MF kernel/vm.d -MT kernel/vm.d -MT kernel/vm.o
+perl kernel/vectors.pl > kernel/vectors.S
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/vectors.S -MF kernel/vectors.d -MT kernel/vectors.d -MT kernel/vectors.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/uart.c -MF kernel/uart.d -MT kernel/uart.d -MT kernel/uart.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/trap.c -MF kernel/trap.d -MT kernel/trap.d -MT kernel/trap.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/trapasm.S -MF kernel/trapasm.d -MT kernel/trapasm.d -MT kernel/trapasm.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/timer.c -MF kernel/timer.d -MT kernel/timer.d -MT kernel/timer.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
@@ -62,11 +137,17 @@ gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/syscall.c -MF kernel/syscall.d -MT kernel/syscall.d -MT kernel/syscall.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/swtch.S -MF kernel/swtch.d -MT kernel/swtch.d -MT kernel/swtch.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/string.c -MF kernel/string.d -MT kernel/string.d -MT kernel/string.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/spinlock.c -MF kernel/spinlock.d -MT kernel/spinlock.d -MT kernel/spinlock.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/proc.c -MF kernel/proc.d -MT kernel/proc.d -MT kernel/proc.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/pipe.c -MF kernel/pipe.d -MT kernel/pipe.d -MT kernel/pipe.o
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/picirq.c -MF kernel/picirq.d -MT kernel/picirq.d -MT kernel/picirq.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/mp.c -MF kernel/mp.d -MT kernel/mp.d -MT kernel/mp.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
@@ -312,15 +393,15 @@ ld  -m    elf_i386 -nostdlib --omagic \
 dd if=/dev/zero of=xv6.img count=10000
 10000+0 records in
 10000+0 records out
-5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.021123 s, 242 MB/s
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0212705 s, 241 MB/s
 dd if=kernel/bootblock of=xv6.img conv=notrunc
 1+0 records in
 1+0 records out
-512 bytes copied, 7.5275e-05 s, 6.8 MB/s
+512 bytes copied, 0.000135575 s, 3.8 MB/s
 dd if=kernel/kernel of=xv6.img seek=1 conv=notrunc
 257+1 records in
 257+1 records out
-131632 bytes (132 kB, 129 KiB) copied, 0.000896734 s, 147 MB/s
+131872 bytes (132 kB, 129 KiB) copied, 0.000538162 s, 245 MB/s
 gcc -c  -iquote include -Wall -Werror -ggdb  -o tools/mkfs.o tools/mkfs.c
 gcc  tools/mkfs.o -o tools/mkfs
 mkdir -p fs
@@ -724,43 +805,50 @@ make
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
-user/tester.c: In function ‘main’:
-user/tester.c:13:9: error: implicit declaration of function ‘dump_allocated’ [-Werror=implicit-function-declaration]
-     if (dump_allocated(frames, numframes) != 0) {
-         ^~~~~~~~~~~~~~
-cc1: all warnings being treated as errors
-user/makefile.mk:92: recipe for target 'user/tester.o' failed
-make: *** [user/tester.o] Error 1
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+mkdir
+kill
+ln
+forktest
+stressfs
+cat
+init
+tester
+echo
+README
+ls
+rm
+grep
+usertests
+zombie
+sh
+wc
+balloc: first 408 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Ctrl+a h for help
+/p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+TEST FAILED
 
 
 test allocator_a FAILED (0 of 5)
  (test the alternate allocator in part 2)
- make failed (error 2)
+ tester failed
 
-**********************************************************************
-Summary:
-test build PASSED
- (build xv6 using make)
-
-test mprotect_basic PASSED (5 of 5)
- (check whether mprotect work properly)
-
-test mprotect_fork PASSED (5 of 5)
- (check whether fork inherit the write bit from parent)
-
-test munprotect_basic PASSED (5 of 5)
- (check whether munprotect work properly)
-
-test test_protect PASSED (8 of 8)
- (check whether mprotect and munprotect work properly)
-
-test protect_error PASSED (5 of 5)
- (check the error handling of mprotect and munprotect)
-
-test allocator_a FAILED (0 of 5)
- (test the alternate allocator in part 2)
- make failed (error 2)
-
-Passed 6 of 7 tests.
-Overall 6 of 7
-Points 28 of 33
+Skipped 0 tests.
+To keep testing after failing a test, use flag '-c' or '--continue'

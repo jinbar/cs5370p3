@@ -27,7 +27,7 @@ kinit(void)
 
   initlock(&kmem.lock, "kmem");
   p = (char*)PGROUNDUP((uint)end);
-  for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE)
+  for(; p + PGSIZE <= (char*)PHYSTOP; p += 2*PGSIZE)
     kfree(p);
 }
 
@@ -69,3 +69,6 @@ kalloc(void)
   return (char*)r;
 }
 
+int dump_allocated(int *frames, int numframes) {
+  return 0;
+}

@@ -109,3 +109,7 @@ int sys_munprotect(void){
   
   return munprotect((void *)addr, len); 
 }
+
+int sys_dump_allocated(void) {
+  return 0;
+}
