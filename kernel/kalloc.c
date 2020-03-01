@@ -57,10 +57,13 @@ kfree(char *v)
   //remove freed node from allocated list. 
   r = kmem.allocated; 
   p = NULL; 
+//  cprintf("LOOKING FOR %d\n", (int)v); 
   while(r != NULL){
+ //   cprintf("Found %d \n", (int)r); 
     //check if we've found our node. 
     if ((struct run*)v == r){
       //check if we're at head of list. 
+   //   cprintf("FOUND"); 
       if (p != NULL){
         p->next = r->next; 
       }else {
@@ -87,11 +90,23 @@ kalloc(void)
     kmem.freelist = r->next;
 
   //add to allocated list.
+ // cprintf("ADDED %d\n", (int)r); 
   r->next = kmem.allocated; 
   kmem.allocated = r; 
+
+  r = kmem.allocated; 
+
+  // cprintf("LIST: ");
+  // while (r!=NULL){
+  //   cprintf("[%x] ", r);
+  //   r = r->next;
+  // }
+  // cprintf("\n"); 
+  
   release(&kmem.lock);
   return (char*)r;
 }
+
 
 int dump_allocated(int *frames, int numframes) {
   struct run *r;  
@@ -110,8 +125,10 @@ int dump_allocated(int *frames, int numframes) {
     return -1; 
   }
 
+  r = kmem.allocated; 
   for(int i = 0; i < numframes; i ++){
-
+    frames[i] = (int) r;
+    r = r->next;  
   }
 
   release(&kmem.lock);
