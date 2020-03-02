@@ -9,6 +9,8 @@ build xv6 using make
 **********************************************************************
 Trying to clean project using make clean
 make clean
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG kernel/kalloc.c -MF kernel/kalloc.d -MT kernel/kalloc.d -MT kernel/kalloc.o
 rm -rf kernel/bio.o kernel/console.o kernel/exec.o kernel/file.o kernel/fs.o kernel/ide.o kernel/ioapic.o kernel/kalloc.o kernel/kbd.o kernel/lapic.o kernel/main.o kernel/mp.o kernel/picirq.o kernel/pipe.o kernel/proc.o kernel/spinlock.o kernel/string.o kernel/swtch.o kernel/syscall.o kernel/sysfile.o kernel/sysproc.o kernel/timer.o kernel/trapasm.o kernel/trap.o kernel/uart.o kernel/vectors.o kernel/vm.o kernel/bootmain.o kernel/bootasm.o kernel/multiboot.o kernel/data.o kernel/bootother.o kernel/initcode.o kernel/bio.d kernel/console.d kernel/exec.d kernel/file.d kernel/fs.d kernel/ide.d kernel/ioapic.d kernel/kalloc.d kernel/kbd.d kernel/lapic.d kernel/main.d kernel/mp.d kernel/picirq.d kernel/pipe.d kernel/proc.d kernel/spinlock.d kernel/string.d kernel/swtch.d kernel/syscall.d kernel/sysfile.d kernel/sysproc.d kernel/timer.d kernel/trapasm.d kernel/trap.d kernel/uart.d kernel/vectors.d kernel/vm.d kernel/bootmain.d kernel/bootasm.d kernel/multiboot.d kernel/data.d kernel/bootother.d kernel/initcode.d kernel/vectors.S kernel/bootblock kernel/bootblock.out kernel/bootother.out kernel/initcode.out kernel/kernel bootother initcode xv6.img user/bin user/cat user/echo user/forktest user/grep user/init user/kill user/ln user/ls user/mkdir user/rm user/sh user/stressfs user/tester user/usertests user/wc user/zombie user/allocator_a user/cat.o user/echo.o user/forktest.o user/grep.o user/init.o user/kill.o user/ln.o user/ls.o user/mkdir.o user/rm.o user/sh.o user/stressfs.o user/tester.o user/usertests.o user/wc.o user/zombie.o user/allocator_a.o user/ulib.o user/usys.o user/printf.o user/umalloc.o user/cat.d user/echo.d user/forktest.d user/grep.d user/init.d user/kill.d user/ln.d user/ls.d user/mkdir.d user/rm.d user/sh.d user/stressfs.d user/tester.d user/usertests.d user/wc.d user/zombie.d user/allocator_a.d user/ulib.d user/usys.d user/printf.d user/umalloc.d tools/mkfs tools/mkfs.o tools/mkfs.d fs fs.img .gdbinit .bochsrc dist
 Trying to build project using make
 make
@@ -233,15 +235,15 @@ ld  -m    elf_i386 -nostdlib --omagic \
 dd if=/dev/zero of=xv6.img count=10000
 10000+0 records in
 10000+0 records out
-5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0214071 s, 239 MB/s
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0203633 s, 251 MB/s
 dd if=kernel/bootblock of=xv6.img conv=notrunc
 1+0 records in
 1+0 records out
-512 bytes copied, 7.2467e-05 s, 7.1 MB/s
+512 bytes copied, 6.5262e-05 s, 7.8 MB/s
 dd if=kernel/kernel of=xv6.img seek=1 conv=notrunc
-266+1 records in
-266+1 records out
-136496 bytes (136 kB, 133 KiB) copied, 0.000514428 s, 265 MB/s
+258+1 records in
+258+1 records out
+132420 bytes (132 kB, 129 KiB) copied, 0.000478669 s, 277 MB/s
 gcc -c  -iquote include -Wall -Werror -ggdb  -o tools/mkfs.o tools/mkfs.c
 gcc  tools/mkfs.o -o tools/mkfs
 mkdir -p fs
@@ -636,6 +638,7 @@ $ tester
 tester
 TEST PASSED
 
+
 test protect_error PASSED (5 of 5)
  (check the error handling of mprotect and munprotect)
 
@@ -692,106 +695,6 @@ cpu0: starting
 init: starting sh
 $ tester
 tester
-Print 100 frames, size is 163frame: 15962112 99 
-frame: 15970304 98 
-frame: 15978496 97 
-frame: 15986688 96 
-frame: 15994880 95 
-frame: 16003072 94 
-frame: 16011264 93 
-frame: 16019456 92 
-frame: 16027648 91 
-frame: 16035840 90 
-frame: 16044032 89 
-frame: 16052224 88 
-frame: 16060416 87 
-frame: 16412672 86 
-frame: 16265216 85 
-frame: 16257024 84 
-frame: 16248832 83 
-frame: 16240640 82 
-frame: 16232448 81 
-frame: 16224256 80 
-frame: 16216064 79 
-frame: 16207872 78 
-frame: 16199680 77 
-frame: 16191488 76 
-frame: 16642048 75 
-frame: 16633856 74 
-frame: 16625664 73 
-frame: 16617472 72 
-frame: 16609280 71 
-frame: 16601088 70 
-frame: 16592896 69 
-frame: 16584704 68 
-frame: 16576512 67 
-frame: 16568320 66 
-frame: 16560128 65 
-frame: 16404480 64 
-frame: 16543744 63 
-frame: 16068608 62 
-frame: 16076800 61 
-frame: 16084992 60 
-frame: 16093184 59 
-frame: 16101376 58 
-frame: 16109568 57 
-frame: 16117760 56 
-frame: 16125952 55 
-frame: 16134144 54 
-frame: 16142336 53 
-frame: 16150528 52 
-frame: 16158720 51 
-frame: 16166912 50 
-frame: 16175104 49 
-frame: 16183296 48 
-frame: 16551936 47 
-frame: 16273408 46 
-frame: 16281600 45 
-frame: 16289792 44 
-frame: 16297984 43 
-frame: 16306176 42 
-frame: 16314368 41 
-frame: 16322560 40 
-frame: 16330752 39 
-frame: 16338944 38 
-frame: 16347136 37 
-frame: 16355328 36 
-frame: 16363520 35 
-frame: 16371712 34 
-frame: 16379904 33 
-frame: 16388096 32 
-frame: 16396288 31 
-frame: 16650240 30 
-frame: 16420864 29 
-frame: 16429056 28 
-frame: 16437248 27 
-frame: 16445440 26 
-frame: 16453632 25 
-frame: 16461824 24 
-frame: 16470016 23 
-frame: 16478208 22 
-frame: 16486400 21 
-frame: 16494592 20 
-frame: 16502784 19 
-frame: 16510976 18 
-frame: 16519168 17 
-frame: 16527360 16 
-frame: 16535552 15 
-frame: 16658432 14 
-frame: 16666624 13 
-frame: 16674816 12 
-frame: 16683008 11 
-frame: 16691200 10 
-frame: 16699392 9 
-frame: 16707584 8 
-frame: 16715776 7 
-frame: 16723968 6 
-frame: 16732160 5 
-frame: 16740352 4 
-frame: 16748544 3 
-frame: 16756736 2 
-frame: 16764928 1 
-frame: 16773120 0 
 TEST PASSED
 
 

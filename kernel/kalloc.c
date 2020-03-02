@@ -37,11 +37,14 @@ remove_allocated(struct run *r){
     }
   }
   kmem.alloc_size --;
-  if (r_loc != 10001){
-    for (int i = r_loc; i < kmem.alloc_size; i ++){
-      kmem.allocatedlist[i] = kmem.allocatedlist[i+1]; 
-    }
+  if (r_loc == 10001){
+    return; 
   }
+  for (int i = r_loc; i < kmem.alloc_size; i ++){
+    kmem.allocatedlist[i] = kmem.allocatedlist[i+1]; 
+  }
+
+
  
 }
 
@@ -55,7 +58,7 @@ kinit(void)
 
   initlock(&kmem.lock, "kmem");
   p = (char*)PGROUNDUP((uint)end);
-  for(; p + PGSIZE <= (char*)PHYSTOP; p += 2*PGSIZE)
+  for(; p + 2*PGSIZE <= (char*)PHYSTOP; p += 2*PGSIZE)
     kfree(p);
   kmem.alloc_size = 0; 
 
@@ -110,14 +113,12 @@ kalloc(void)
 
 int dump_allocated(int *frames, int numframes) {
 
-  cprintf("Print %d frames, size is %d", numframes, kmem.alloc_size); 
   if (numframes > kmem.alloc_size){
     return -1; 
   }
 
   for(int i = numframes - 1; i >= 0; i --){
     frames[i] = (int)kmem.allocatedlist[i]; 
-    cprintf("frame: %d %d \n", frames[i], i); 
   }
 
   return 0; 
