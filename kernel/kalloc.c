@@ -19,7 +19,10 @@ struct {
   struct run *freelist;
   struct run * allocatedlist[10000]; 
   int alloc_size;
+  int free_size;
 } kmem;
+
+int seed = 1;
 
 static void
 add_allocated(struct run * r){
@@ -27,21 +30,17 @@ add_allocated(struct run * r){
   kmem.alloc_size ++; 
 }
 
-int seed = 1;
-int size = 0;
-
-static void
-remove_allocated(struct run *r){
+static void remove_allocated(struct run *r){
   int r_loc = 10001; 
-  for(int i = 0; i < kmem.alloc_size; i ++){
-    if (kmem.allocatedlist[i] == r){
+  for (int i = 0; i < kmem.alloc_size; i ++) {
+    if (kmem.allocatedlist[i] == r) {
       r_loc = i; 
       break; 
     }
   }
-  kmem.alloc_size --;
+  kmem.alloc_size--;
   if (r_loc != 10001){
-    for (int i = r_loc; i < kmem.alloc_size; i ++){
+    for (int i = r_loc; i < kmem.alloc_size; i ++) {
       kmem.allocatedlist[i] = kmem.allocatedlist[i+1]; 
     }
   }
@@ -50,15 +49,13 @@ remove_allocated(struct run *r){
 extern char end[]; // first address after kernel loaded from ELF file
 
 // Initialize free list of physical pages.
-void
-kinit(void)
-{
+void kinit(void) {
   char *p;
-
   initlock(&kmem.lock, "kmem");
   p = (char*)PGROUNDUP((uint)end);
-  for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE)
+  for (; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE) {
     kfree(p);
+  }
   kmem.alloc_size = 0;
 }
 
@@ -66,18 +63,16 @@ kinit(void)
 // which normally should have been returned by a
 // call to kalloc().  (The exception is when
 // initializing the allocator; see kinit above.)
-void
-kfree(char *v)
-{
+void kfree(char *v) {
   struct run *r;
-  if((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) 
+  if ((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) {
     panic("kfree");
+  }
 
   // Fill with junk to catch dangling refs.
   memset(v, 1, PGSIZE);
-
   acquire(&kmem.lock);
-  size++;
+  kmem.free_size++;
   r = (struct run*)v;
   r->next = kmem.freelist;
   kmem.freelist = r;
@@ -88,16 +83,14 @@ kfree(char *v)
 // Allocate one 4096-byte page of physical memory.
 // Returns a pointer that the kernel can use.
 // Returns 0 if the memory cannot be allocated.
-char*
-kalloc(void)
-{
+char* kalloc(void) {
   struct run *r;
   struct run *temp;
   acquire(&kmem.lock);
   r = kmem.freelist;
   xv6_srand(seed);
   if(r) {
-    int remainder = xv6_rand() % size;
+    int remainder = xv6_rand() % kmem.free_size;
     if (remainder == 0) {
       kmem.freelist = r->next;
       temp = r;
@@ -108,7 +101,7 @@ kalloc(void)
       temp = r->next;
       r->next = r->next->next;
     }
-    size--;
+    kmem.free_size--;
     add_allocated(temp); 
   }
   release(&kmem.lock);
@@ -120,10 +113,8 @@ int dump_allocated(int *frames, int numframes) {
   if (numframes > kmem.alloc_size){
     return -1; 
   }
-
   int j = 0;
-
-  for(int i = numframes - 1; i >= 0; i --){
+  for (int i = numframes - 1; i >= 0; i --) {
     frames[j++] = (int)kmem.allocatedlist[i]; 
     cprintf("frame: %x %d \n", frames[i], i); 
   }
