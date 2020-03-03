@@ -5,7 +5,7 @@
 
 #ifndef _RAND_H
 #define _RAND_H
-#define	XV6_RAND_MAX = 2147483647
+#define	XV6_RAND_MAX 2147483647
 
 
 /* 

@@ -19,7 +19,6 @@ struct {
   struct run *freelist;
   struct run * allocatedlist[10000]; 
   int alloc_size;
-  int size;
 } kmem;
 
 static void
@@ -29,6 +28,7 @@ add_allocated(struct run * r){
 }
 
 int seed = 1;
+int size = 0;
 
 static void
 remove_allocated(struct run *r){
@@ -57,10 +57,8 @@ kinit(void)
 
   initlock(&kmem.lock, "kmem");
   p = (char*)PGROUNDUP((uint)end);
-  for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE) {
+  for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE)
     kfree(p);
-    kmem.size++;
-  }
   kmem.alloc_size = 0;
 }
 
@@ -79,6 +77,7 @@ kfree(char *v)
   memset(v, 1, PGSIZE);
 
   acquire(&kmem.lock);
+  size++;
   r = (struct run*)v;
   r->next = kmem.freelist;
   kmem.freelist = r;
@@ -98,7 +97,7 @@ kalloc(void)
   r = kmem.freelist;
   xv6_srand(seed);
   if(r) {
-    int remainder = xv6_rand() % kmem.size;
+    int remainder = xv6_rand() % size;
     if (remainder == 0) {
       kmem.freelist = r->next;
       temp = r;
@@ -108,8 +107,8 @@ kalloc(void)
       }
       temp = r->next;
       r->next = r->next->next;
-      kmem.size--;
     }
+    size--;
     add_allocated(temp); 
   }
   release(&kmem.lock);
@@ -121,9 +120,12 @@ int dump_allocated(int *frames, int numframes) {
   if (numframes > kmem.alloc_size){
     return -1; 
   }
+
+  int j = 0;
+
   for(int i = numframes - 1; i >= 0; i --){
-    frames[i] = (int)kmem.allocatedlist[i]; 
-    cprintf("frame: %d %d \n", frames[i], i); 
+    frames[j++] = (int)kmem.allocatedlist[i]; 
+    cprintf("frame: %x %d \n", frames[i], i); 
   }
   return 0; 
 }
