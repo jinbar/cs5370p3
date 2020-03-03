@@ -17,7 +17,8 @@ USER_PROGS := \
 	usertests\
 	wc\
 	zombie\
-        allocator_a	
+    allocator_a\
+	fork_test
 
 USER_PROGS := $(addprefix user/, $(USER_PROGS))
 

@@ -20,8 +20,7 @@ struct {
   int alloc_size; 
 } kmem;
 
-static void
-add_allocated(struct run * r){
+static void add_allocated(struct run * r){
   kmem.allocatedlist[kmem.alloc_size] = r; 
   kmem.alloc_size ++; 
 }
