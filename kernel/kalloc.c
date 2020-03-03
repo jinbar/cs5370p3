@@ -1,7 +1,6 @@
 // Physical memory allocator, intended to allocate
 // memory for user processes, kernel stacks, page table pages,
 // and pipe buffers. Allocates 4096-byte pages.
-
 #include "types.h"
 #include "defs.h"
 #include "param.h"
@@ -108,14 +107,12 @@ char* kalloc(void) {
 }
 
 int dump_allocated(int *frames, int numframes) {
-  cprintf("Print %d frames, size is %d", numframes, kmem.alloc_size); 
   if (numframes > kmem.alloc_size) {
     return -1; 
   }
   int j = 0;
   for (int i = numframes - 1; i >= 0; i --) {
     frames[j++] = (int)kmem.allocatedlist[i]; 
-    cprintf("frame: %x %d \n", frames[i], i); 
   }
   return 0; 
 }
