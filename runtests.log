@@ -58,6 +58,7 @@ Makefile:149: user/tester.d: No such file or directory
 Makefile:149: user/usertests.d: No such file or directory
 Makefile:149: user/wc.d: No such file or directory
 Makefile:149: user/zombie.d: No such file or directory
+Makefile:149: user/allocator_a.d: No such file or directory
 Makefile:149: user/ulib.d: No such file or directory
 Makefile:149: user/usys.d: No such file or directory
 Makefile:149: user/printf.d: No such file or directory
@@ -73,6 +74,7 @@ gcc  -I include -nostdinc -ggdb  -fno-pic -fno-builtin -fno-strict-aliasing -fno
 	-M -MG user/usys.S -MF user/usys.d -MT user/usys.d -MT user/usys.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/ulib.c -MF user/ulib.d -MT user/ulib.d -MT user/ulib.o
+No rule to make target user/allocator_a.d
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/zombie.c -MF user/zombie.d -MT user/zombie.d -MT user/zombie.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
@@ -172,7 +174,9 @@ gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-
 	-M -MG kernel/console.c -MF kernel/console.d -MT kernel/console.d -MT kernel/console.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/bio.c -MF kernel/bio.d -MT kernel/bio.d -MT kernel/bio.o
-rm -rf kernel/bio.o kernel/console.o kernel/exec.o kernel/file.o kernel/fs.o kernel/ide.o kernel/ioapic.o kernel/kalloc.o kernel/kbd.o kernel/lapic.o kernel/main.o kernel/mp.o kernel/picirq.o kernel/pipe.o kernel/proc.o kernel/spinlock.o kernel/string.o kernel/swtch.o kernel/syscall.o kernel/sysfile.o kernel/sysproc.o kernel/timer.o kernel/trapasm.o kernel/trap.o kernel/uart.o kernel/vectors.o kernel/vm.o kernel/bootmain.o kernel/bootasm.o kernel/multiboot.o kernel/data.o kernel/bootother.o kernel/initcode.o kernel/bio.d kernel/console.d kernel/exec.d kernel/file.d kernel/fs.d kernel/ide.d kernel/ioapic.d kernel/kalloc.d kernel/kbd.d kernel/lapic.d kernel/main.d kernel/mp.d kernel/picirq.d kernel/pipe.d kernel/proc.d kernel/spinlock.d kernel/string.d kernel/swtch.d kernel/syscall.d kernel/sysfile.d kernel/sysproc.d kernel/timer.d kernel/trapasm.d kernel/trap.d kernel/uart.d kernel/vectors.d kernel/vm.d kernel/bootmain.d kernel/bootasm.d kernel/multiboot.d kernel/data.d kernel/bootother.d kernel/initcode.d kernel/vectors.S kernel/bootblock kernel/bootblock.out kernel/bootother.out kernel/initcode.out kernel/kernel bootother initcode xv6.img user/bin user/cat user/echo user/forktest user/grep user/init user/kill user/ln user/ls user/mkdir user/rm user/sh user/stressfs user/tester user/usertests user/wc user/zombie user/cat.o user/echo.o user/forktest.o user/grep.o user/init.o user/kill.o user/ln.o user/ls.o user/mkdir.o user/rm.o user/sh.o user/stressfs.o user/tester.o user/usertests.o user/wc.o user/zombie.o user/ulib.o user/usys.o user/printf.o user/umalloc.o user/cat.d user/echo.d user/forktest.d user/grep.d user/init.d user/kill.d user/ln.d user/ls.d user/mkdir.d user/rm.d user/sh.d user/stressfs.d user/tester.d user/usertests.d user/wc.d user/zombie.d user/ulib.d user/usys.d user/printf.d user/umalloc.d tools/mkfs tools/mkfs.o tools/mkfs.d fs fs.img .gdbinit .bochsrc dist
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+rm -rf kernel/bio.o kernel/console.o kernel/exec.o kernel/file.o kernel/fs.o kernel/ide.o kernel/ioapic.o kernel/kalloc.o kernel/kbd.o kernel/lapic.o kernel/main.o kernel/mp.o kernel/picirq.o kernel/pipe.o kernel/proc.o kernel/spinlock.o kernel/string.o kernel/swtch.o kernel/syscall.o kernel/sysfile.o kernel/sysproc.o kernel/timer.o kernel/trapasm.o kernel/trap.o kernel/uart.o kernel/vectors.o kernel/vm.o kernel/bootmain.o kernel/bootasm.o kernel/multiboot.o kernel/data.o kernel/bootother.o kernel/initcode.o kernel/bio.d kernel/console.d kernel/exec.d kernel/file.d kernel/fs.d kernel/ide.d kernel/ioapic.d kernel/kalloc.d kernel/kbd.d kernel/lapic.d kernel/main.d kernel/mp.d kernel/picirq.d kernel/pipe.d kernel/proc.d kernel/spinlock.d kernel/string.d kernel/swtch.d kernel/syscall.d kernel/sysfile.d kernel/sysproc.d kernel/timer.d kernel/trapasm.d kernel/trap.d kernel/uart.d kernel/vectors.d kernel/vm.d kernel/bootmain.d kernel/bootasm.d kernel/multiboot.d kernel/data.d kernel/bootother.d kernel/initcode.d kernel/vectors.S kernel/bootblock kernel/bootblock.out kernel/bootother.out kernel/initcode.out kernel/kernel bootother initcode xv6.img user/bin user/cat user/echo user/forktest user/grep user/init user/kill user/ln user/ls user/mkdir user/rm user/sh user/stressfs user/tester user/usertests user/wc user/zombie user/allocator_a user/cat.o user/echo.o user/forktest.o user/grep.o user/init.o user/kill.o user/ln.o user/ls.o user/mkdir.o user/rm.o user/sh.o user/stressfs.o user/tester.o user/usertests.o user/wc.o user/zombie.o user/allocator_a.o user/ulib.o user/usys.o user/printf.o user/umalloc.o user/cat.d user/echo.d user/forktest.d user/grep.d user/init.d user/kill.d user/ln.d user/ls.d user/mkdir.d user/rm.d user/sh.d user/stressfs.d user/tester.d user/usertests.d user/wc.d user/zombie.d user/allocator_a.d user/ulib.d user/usys.d user/printf.d user/umalloc.d tools/mkfs tools/mkfs.o tools/mkfs.d fs fs.img .gdbinit .bochsrc dist
 Trying to build project using make
 make
 Makefile:149: kernel/bio.d: No such file or directory
@@ -224,6 +228,7 @@ Makefile:149: user/tester.d: No such file or directory
 Makefile:149: user/usertests.d: No such file or directory
 Makefile:149: user/wc.d: No such file or directory
 Makefile:149: user/zombie.d: No such file or directory
+Makefile:149: user/allocator_a.d: No such file or directory
 Makefile:149: user/ulib.d: No such file or directory
 Makefile:149: user/usys.d: No such file or directory
 Makefile:149: user/printf.d: No such file or directory
@@ -239,6 +244,7 @@ gcc  -I include -nostdinc -ggdb  -fno-pic -fno-builtin -fno-strict-aliasing -fno
 	-M -MG user/usys.S -MF user/usys.d -MT user/usys.d -MT user/usys.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/ulib.c -MF user/ulib.d -MT user/ulib.d -MT user/ulib.o
+No rule to make target user/allocator_a.d
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG user/zombie.c -MF user/zombie.d -MT user/zombie.d -MT user/zombie.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
@@ -338,6 +344,8 @@ gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-
 	-M -MG kernel/console.c -MF kernel/console.d -MT kernel/console.d -MT kernel/console.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	-M -MG kernel/bio.c -MF kernel/bio.d -MT kernel/bio.d -MT kernel/bio.o
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
 gcc  -I include -nostdinc -ggdb  -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c kernel/bootasm.S -o kernel/bootasm.o
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
 	 -Os -c -o kernel/bootmain.o kernel/bootmain.c
@@ -393,15 +401,15 @@ ld  -m    elf_i386 -nostdlib --omagic \
 dd if=/dev/zero of=xv6.img count=10000
 10000+0 records in
 10000+0 records out
-5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0196221 s, 261 MB/s
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.0210268 s, 243 MB/s
 dd if=kernel/bootblock of=xv6.img conv=notrunc
 1+0 records in
 1+0 records out
-512 bytes copied, 8.3214e-05 s, 6.2 MB/s
+512 bytes copied, 0.000106864 s, 4.8 MB/s
 dd if=kernel/kernel of=xv6.img seek=1 conv=notrunc
-258+1 records in
-258+1 records out
-132400 bytes (132 kB, 129 KiB) copied, 0.000703239 s, 188 MB/s
+267+1 records in
+267+1 records out
+136928 bytes (137 kB, 134 KiB) copied, 0.000542841 s, 252 MB/s
 gcc -c  -iquote include -Wall -Werror -ggdb  -o tools/mkfs.o tools/mkfs.c
 gcc  tools/mkfs.o -o tools/mkfs
 mkdir -p fs
@@ -459,25 +467,26 @@ cp user/bin/wc fs/wc
 gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/zombie.o user/zombie.c
 ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/zombie user/zombie.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
 cp user/bin/zombie fs/zombie
+No rule to make target fs/allocator_a
 ./tools/mkfs fs.img fs
 used 29 (bit 1 ninode 26) free 29 total 1024
-usertests
-forktest
+grep
 cat
+stressfs
+forktest
+sh
+README
 zombie
 ln
-README
-stressfs
-mkdir
-kill
-echo
-rm
 wc
-sh
-grep
-init
+echo
 tester
 ls
+usertests
+init
+kill
+rm
+mkdir
 balloc: first 407 blocks have been allocated
 balloc: write bitmap block at sector 28
 rm user/bin/ls user/bin/stressfs user/bin/grep user/bin/sh user/bin/tester user/bin/kill user/bin/cat user/bin/mkdir user/bin/init user/bin/rm user/bin/echo user/bin/ln user/bin/usertests user/bin/wc user/bin/zombie
@@ -486,26 +495,665 @@ rm user/bin/ls user/bin/stressfs user/bin/grep user/bin/sh user/bin/tester user/
 test build PASSED
  (build xv6 using make)
 
-starting statistical test
+starting mprotect_basic
 
 **********************************************************************
 
-Test statistical test
-compile and test the uniformity and randomness of the random number generator
+Test mprotect_basic
+check whether mprotect work properly
 
 **********************************************************************
-gcc -Wl,-wrap,rand /u/c/s/cs537-1/tests/p3b/ctests/rand_tester.c kernel/rand.c -I./include -I./user -I.kernel/ -o rand_tester -Wall -Werror
-/tmp/tmpX_y13Q/p/./rand_tester 3748 2147483647
-/tmp/tmpX_y13Q/p/./rand_tester 2468 2147483647
-/tmp/tmpX_y13Q/p/./rand_tester 540 2147483647
-/tmp/tmpX_y13Q/p/./rand_tester 1911 2147483647
-/tmp/tmpX_y13Q/p/./rand_tester 2990 2147483647
-Failure: statistical test Test: PRNG failed on Kolmogorov-Smirnov test.
+Running xv6 user progam /u/c/s/cs537-1/tests/p3a/ctests/mprotect_basic.c
+Trying to build project using make
+make
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 409 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 409 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+/p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+write to a protected page
+pid 4 tester: trap 14 err 7 on cpu 0 eip 0xb9 addr 0x2000--kill proc
+write to an unprotected page
+TEST PASSED
 
 
-test statistical test FAILED (0 of 5)
- (compile and test the uniformity and randomness of the random number generator)
- statistical test Test: PRNG failed on Kolmogorov-Smirnov test.
+test mprotect_basic PASSED (5 of 5)
+ (check whether mprotect work properly)
 
-Skipped 2 tests.
-To keep testing after failing a test, use flag '-c' or '--continue'
+starting mprotect_fork
+
+**********************************************************************
+
+Test mprotect_fork
+check whether fork inherit the write bit from parent
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/p3a/ctests/mprotect_fork.c
+Trying to build project using make
+make
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 408 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 408 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+/p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+write to protected page in the child
+pid 4 tester: trap 14 err 7 on cpu 0 eip 0xb9 addr 0x2000--kill proc
+TEST PASSED
+
+
+test mprotect_fork PASSED (5 of 5)
+ (check whether fork inherit the write bit from parent)
+
+starting munprotect_basic
+
+**********************************************************************
+
+Test munprotect_basic
+check whether munprotect work properly
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/p3a/ctests/munprotect_basic.c
+Trying to build project using make
+make
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 409 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 409 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+/p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+write to protected page
+pid 4 tester: trap 14 err 7 on cpu 0 eip 0xaa addr 0x2000--kill proc
+write to an unprotected page
+TEST PASSED
+
+
+test munprotect_basic PASSED (5 of 5)
+ (check whether munprotect work properly)
+
+starting test_protect
+
+**********************************************************************
+
+Test test_protect
+check whether mprotect and munprotect work properly
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/p3a/ctests/test_protect.c
+Trying to build project using make
+make
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 410 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 410 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+/p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+write to a protected page
+pid 4 tester: trap 14 err 7 on cpu 0 eip 0x95 addr 0x4fff--kill proc
+write to a protected page
+pid 5 tester: trap 14 err 7 on cpu 0 eip 0x139 addr 0x3000--kill proc
+write to a protected page
+pid 6 tester: trap 14 err 7 on cpu 0 eip 0x1ec addr 0x2000--kill proc
+write to an unprotected page
+TEST PASSED
+
+
+test test_protect PASSED (8 of 8)
+ (check whether mprotect and munprotect work properly)
+
+starting protect_error
+
+**********************************************************************
+
+Test protect_error
+check the error handling of mprotect and munprotect
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/p3a/ctests/protect_error.c
+Trying to build project using make
+make
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 408 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 408 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+/p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+TEST PASSED
+
+
+test protect_error PASSED (5 of 5)
+ (check the error handling of mprotect and munprotect)
+
+starting allocator_a
+
+**********************************************************************
+
+Test allocator_a
+test the alternate allocator in part 2
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/p3a/ctests/allocator_a.c
+Trying to build project using make
+make
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 408 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox CPUS=1
+Makefile:149: user/allocator_a.d: No such file or directory
+No rule to make target user/allocator_a.d
+No rule to make target fs/allocator_a
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+grep
+cat
+stressfs
+forktest
+sh
+README
+zombie
+ln
+wc
+echo
+tester
+ls
+usertests
+init
+kill
+rm
+mkdir
+balloc: first 408 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+/p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 1
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+cpu0: starting
+init: starting sh
+$ tester
+tester
+Print 100 frames, size is 163frame: 14979072 99 
+frame: 16355328 98 
+frame: 2117632 97 
+frame: 3493888 96 
+frame: 4845568 95 
+frame: 6197248 94 
+frame: 7557120 93 
+frame: 8933376 92 
+frame: 10285056 91 
+frame: 11644928 90 
+frame: 12996608 89 
+frame: 14348288 88 
+frame: 15708160 87 
+frame: 12439552 86 
+frame: 2805760 85 
+frame: 4165632 84 
+frame: 5509120 83 
+frame: 6844416 82 
+frame: 8179712 81 
+frame: 9515008 80 
+frame: 10850304 79 
+frame: 12210176 78 
+frame: 13545472 77 
+frame: 14905344 76 
+frame: 16240640 75 
+frame: 1953792 74 
+frame: 3289088 73 
+frame: 4616192 72 
+frame: 5935104 71 
+frame: 7262208 70 
+frame: 8605696 69 
+frame: 9924608 68 
+frame: 11251712 67 
+frame: 12587008 66 
+frame: 13905920 65 
+frame: 15224832 64 
+frame: 16543744 63 
+frame: 2035712 62 
+frame: 3346432 61 
+frame: 4657152 60 
+frame: 5967872 59 
+frame: 7270400 58 
+frame: 8589312 57 
+frame: 9891840 56 
+frame: 11194368 55 
+frame: 12521472 54 
+frame: 13824000 53 
+frame: 15126528 52 
+frame: 16429056 51 
+frame: 2109440 50 
+frame: 3403776 49 
+frame: 4698112 48 
+frame: 5427200 47 
+frame: 6557696 46 
+frame: 7811072 45 
+frame: 9064448 44 
+frame: 10317824 43 
+frame: 11571200 42 
+frame: 12824576 41 
+frame: 14077952 40 
+frame: 15331328 39 
+frame: 16584704 38 
+frame: 2215936 37 
+frame: 3461120 36 
+frame: 4706304 35 
+frame: 5943296 34 
+frame: 7180288 33 
+frame: 8417280 32 
+frame: 9654272 31 
+frame: 13709312 30 
+frame: 14807040 29 
+frame: 16027648 28 
+frame: 1626112 27 
+frame: 2838528 26 
+frame: 4050944 25 
+frame: 5255168 24 
+frame: 6467584 23 
+frame: 7671808 22 
+frame: 8876032 21 
+frame: 10080256 20 
+frame: 11284480 19 
+frame: 12488704 18 
+frame: 13692928 17 
+frame: 14897152 16 
+frame: 16101376 15 
+frame: 2699264 14 
+frame: 3878912 13 
+frame: 5050368 12 
+frame: 6221824 11 
+frame: 7393280 10 
+frame: 8564736 9 
+frame: 9736192 8 
+frame: 10907648 7 
+frame: 12079104 6 
+frame: 13250560 5 
+frame: 14422016 4 
+frame: 15593472 3 
+frame: 16764928 2 
+frame: 2314240 1 
+frame: 3477504 0 
+TEST PASSED
+
+test allocator_a PASSED (5 of 5)
+ (test the alternate allocator in part 2)
+
+**********************************************************************
+Summary:
+test build PASSED
+ (build xv6 using make)
+
+test mprotect_basic PASSED (5 of 5)
+ (check whether mprotect work properly)
+
+test mprotect_fork PASSED (5 of 5)
+ (check whether fork inherit the write bit from parent)
+
+test munprotect_basic PASSED (5 of 5)
+ (check whether munprotect work properly)
+
+test test_protect PASSED (8 of 8)
+ (check whether mprotect and munprotect work properly)
+
+test protect_error PASSED (5 of 5)
+ (check the error handling of mprotect and munprotect)
+
+test allocator_a PASSED (5 of 5)
+ (test the alternate allocator in part 2)
+
+Passed 7 of 7 tests.
+Overall 7 of 7
+Points 33 of 33

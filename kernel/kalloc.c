@@ -17,10 +17,35 @@ struct run {
 struct {
   struct spinlock lock;
   struct run *freelist;
+  struct run * allocatedlist[10000]; 
+  int alloc_size;
   int size;
 } kmem;
 
+static void
+add_allocated(struct run * r){
+  kmem.allocatedlist[kmem.alloc_size] = r; 
+  kmem.alloc_size ++; 
+}
+
 int seed = 1;
+
+static void
+remove_allocated(struct run *r){
+  int r_loc = 10001; 
+  for(int i = 0; i < kmem.alloc_size; i ++){
+    if (kmem.allocatedlist[i] == r){
+      r_loc = i; 
+      break; 
+    }
+  }
+  kmem.alloc_size --;
+  if (r_loc != 10001){
+    for (int i = r_loc; i < kmem.alloc_size; i ++){
+      kmem.allocatedlist[i] = kmem.allocatedlist[i+1]; 
+    }
+  }
+}
 
 extern char end[]; // first address after kernel loaded from ELF file
 
@@ -32,12 +57,11 @@ kinit(void)
 
   initlock(&kmem.lock, "kmem");
   p = (char*)PGROUNDUP((uint)end);
-  kmem.size = 0;
   for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE) {
     kfree(p);
     kmem.size++;
   }
-    
+  kmem.alloc_size = 0;
 }
 
 // Free the page of physical memory pointed at by v,
@@ -48,7 +72,6 @@ void
 kfree(char *v)
 {
   struct run *r;
-
   if((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) 
     panic("kfree");
 
@@ -59,6 +82,7 @@ kfree(char *v)
   r = (struct run*)v;
   r->next = kmem.freelist;
   kmem.freelist = r;
+  remove_allocated(r);
   release(&kmem.lock);
 }
 
@@ -70,7 +94,6 @@ kalloc(void)
 {
   struct run *r;
   struct run *temp;
-  
   acquire(&kmem.lock);
   r = kmem.freelist;
   xv6_srand(seed);
@@ -78,20 +101,29 @@ kalloc(void)
     int remainder = xv6_rand() % kmem.size;
     if (remainder == 0) {
       kmem.freelist = r->next;
+      temp = r;
     } else {
       for (int i = 0; i < remainder - 1; i++) {
         r = r->next;
       }
       temp = r->next;
       r->next = r->next->next;
-      kmem.size--;      
+      kmem.size--;
     }
+    add_allocated(temp); 
   }
-    
   release(&kmem.lock);
-  return (char*)temp;
+  return (char*) temp;
 }
 
 int dump_allocated(int *frames, int numframes) {
-  return 0;
+  cprintf("Print %d frames, size is %d", numframes, kmem.alloc_size); 
+  if (numframes > kmem.alloc_size){
+    return -1; 
+  }
+  for(int i = numframes - 1; i >= 0; i --){
+    frames[i] = (int)kmem.allocatedlist[i]; 
+    cprintf("frame: %d %d \n", frames[i], i); 
+  }
+  return 0; 
 }
