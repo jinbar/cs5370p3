@@ -24,13 +24,12 @@ struct {
 
 int seed = 1;
 
-static void
-add_allocated(struct run * r){
+static void add_allocated(struct run * r) {
   kmem.allocatedlist[kmem.alloc_size] = r; 
   kmem.alloc_size ++; 
 }
 
-static void remove_allocated(struct run *r){
+static void remove_allocated(struct run *r) {
   int r_loc = 10001; 
   for (int i = 0; i < kmem.alloc_size; i ++) {
     if (kmem.allocatedlist[i] == r) {
@@ -39,7 +38,7 @@ static void remove_allocated(struct run *r){
     }
   }
   kmem.alloc_size--;
-  if (r_loc != 10001){
+  if (r_loc != 10001) {
     for (int i = r_loc; i < kmem.alloc_size; i ++) {
       kmem.allocatedlist[i] = kmem.allocatedlist[i+1]; 
     }
@@ -110,7 +109,7 @@ char* kalloc(void) {
 
 int dump_allocated(int *frames, int numframes) {
   cprintf("Print %d frames, size is %d", numframes, kmem.alloc_size); 
-  if (numframes > kmem.alloc_size){
+  if (numframes > kmem.alloc_size) {
     return -1; 
   }
   int j = 0;

@@ -443,16 +443,15 @@ procdump(void)
   }
 }
 
-int mprotect(void* addr, int len){
-  
+int mprotect(void* addr, int len) {
   int success; 
-  if (len <= 0 || (uint)addr & (PGSIZE - 1) || (uint)addr + len*PGSIZE > USERTOP){
+  if (len <= 0 || (uint)addr & (PGSIZE - 1) || (uint)addr + len*PGSIZE > USERTOP) {
     return -1; 
   }
 
-  for (int i = 0; i < len; i ++){
+  for (int i = 0; i < len; i ++) {
     success = unsetpermbit(proc->pgdir, addr + (i*PGSIZE), PTE_W); 
-    if (success == -1){ // failed for some reason
+    if (success == -1 ){ // failed for some reason
       return -1; 
     } 
   }
@@ -462,15 +461,16 @@ int mprotect(void* addr, int len){
 
 int munprotect(void *addr, int len) {
   int success; 
-  if (len <= 0 || (uint)addr & (PGSIZE - 1) || (uint)addr + len*PGSIZE > USERTOP){
+  if (len <= 0 || (uint)addr & (PGSIZE - 1) || (uint)addr + len*PGSIZE > USERTOP) {
     return -1; 
   }
-  for (int i = 0; i < len; i ++){
+
+  for (int i = 0; i < len; i ++) {
     success = setpermbit(proc->pgdir, addr + (i*PGSIZE), PTE_W); 
     if (success == -1){ // failed for some reason
       return -1; 
     } 
   }
-  
+
   return 0; 
 }
